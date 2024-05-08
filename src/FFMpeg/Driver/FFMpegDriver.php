@@ -21,12 +21,7 @@ use Psr\Log\LoggerInterface;
 
 class FFMpegDriver extends AbstractBinary
 {
-    /**
-     * {@inheritdoc}
-     *
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
         return 'ffmpeg';
     }
