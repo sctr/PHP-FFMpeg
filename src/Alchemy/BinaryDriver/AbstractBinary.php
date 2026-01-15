@@ -172,10 +172,8 @@ abstract class AbstractBinary extends EventEmitter implements BinaryInterface
 
     /**
      * Returns the name of the driver
-     *
-     * @return string
      */
-    abstract public function getName();
+    abstract public function getName(): string;
 
     /**
      * Executes a process, logs events
