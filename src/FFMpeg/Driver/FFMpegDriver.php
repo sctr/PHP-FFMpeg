@@ -21,10 +21,7 @@ use Psr\Log\LoggerInterface;
 
 class FFMpegDriver extends AbstractBinary
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
+    public function getName(): string
     {
         return 'ffmpeg';
     }
@@ -37,7 +34,7 @@ class FFMpegDriver extends AbstractBinary
      *
      * @return FFMpegDriver
      */
-    public static function create(LoggerInterface $logger = null, $configuration = [])
+    public static function create(?LoggerInterface $logger = null, $configuration = [])
     {
         if (!$configuration instanceof ConfigurationInterface) {
             $configuration = new Configuration($configuration);

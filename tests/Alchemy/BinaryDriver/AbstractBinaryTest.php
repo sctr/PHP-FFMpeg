@@ -293,7 +293,7 @@ class AbstractBinaryTest extends BinaryDriverTestCase
 
 class Implementation extends AbstractBinary
 {
-    public function getName()
+    public function getName(): string
     {
         return 'Implementation';
     }

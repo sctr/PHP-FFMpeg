@@ -203,8 +203,7 @@ class VideoTest extends AbstractStreamableTestCase
             if (count($expectedCommands) > 1) {
                 // look for pass commands only in multipass cases
                 foreach ($pass as $command) {
-                    $prefix = null;
-                    if (false !== strpos($command, '/pass-')) {
+                    if (str_contains($command, '/pass-')) {
                         $prefix = $command;
                         break;
                     }
@@ -453,119 +452,89 @@ class VideoTest extends AbstractStreamableTestCase
         return [
             [false, [[
                 '-y', '-i', __FILE__, '-b:v', '663k',
-                '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
-                '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
-                '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', 2, 'foo', 'bar', '-pass', 1, '-passlogfile',
+                '-b:a', '92k', '-ac', 2, 'foo', 'bar', '-pass', 1, '-passlogfile',
                 '/target/file',
             ], [
                 '-y', '-i', __FILE__,
                 '-b:v', '663k',
-                '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
-                '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
-                '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', 2, 'foo', 'bar', '-pass', 2, '-passlogfile',
+                '-b:a', '92k', '-ac', 2, 'foo', 'bar', '-pass', 2, '-passlogfile',
                 '/target/file',
             ]], null, $format],
             [false, [[
                 '-y', '-i', __FILE__,
                 '-vcodec', 'gloubi-boulga-video',
                 '-acodec', 'patati-patata-audio', '-b:v', '664k',
-                '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
-                '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
-                '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', '2', '-pass', '1', '-passlogfile',
+                '-b:a', '92k', '-ac', '2', '-pass', '1', '-passlogfile',
                 '/target/file',
             ], [
                 '-y', '-i', __FILE__,
                 '-vcodec', 'gloubi-boulga-video',
                 '-acodec', 'patati-patata-audio',
                 '-b:v', '664k',
-                '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
-                '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
-                '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', '2', '-pass', '2', '-passlogfile',
+                '-b:a', '92k', '-ac', '2', '-pass', '2', '-passlogfile',
                 '/target/file',
             ]], null, $audioVideoFormat],
             [false, [[
                 '-y', '-i', __FILE__,
                 '-vcodec', 'gloubi-boulga-video',
                 '-acodec', 'patati-patata-audio', '-b:v', '664k',
-                '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
-                '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
-                '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', '2',
+                '-b:a', '92k', '-ac', '2',
                 '/target/file',
             ]], null, $audioVideoFormatSinglePass],
             [false, [[
                 '-y', '-i', __FILE__,
                 'extra', 'param', '-b:v', '665k',
-                '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
-                '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
-                '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', '2', '-pass', '1', '-passlogfile',
+                '-b:a', '92k', '-ac', '2', '-pass', '1', '-passlogfile',
                 '/target/file',
             ], [
                 '-y', '-i', __FILE__,
                 'extra', 'param', '-b:v', '665k',
-                '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
-                '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
-                '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', '2', '-pass', '2', '-passlogfile',
+                '-b:a', '92k', '-ac', '2', '-pass', '2', '-passlogfile',
                 '/target/file',
             ]], null, $formatExtra],
             [true, [[
                 '-y', '-i', __FILE__,
                 '-threads', 24, '-b:v', '663k',
-                '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
-                '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
-                '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', 2, 'foo', 'bar', '-pass', 1, '-passlogfile',
+                '-b:a', '92k', '-ac', 2, 'foo', 'bar', '-pass', 1, '-passlogfile',
                 '/target/file',
             ], [
                 '-y', '-i', __FILE__,
                 '-threads', 24,
                 '-b:v', '663k',
-                '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
-                '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
-                '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', 2, 'foo', 'bar', '-pass', 2, '-passlogfile',
+                '-b:a', '92k', '-ac', 2, 'foo', 'bar', '-pass', 2, '-passlogfile',
                 '/target/file',
             ]], null, $format2],
             [true, [[
                 '-y', '-i', __FILE__,
                 'extra', 'param', '-threads', 24, '-b:v', '665k',
-                '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
-                '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
-                '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', '2', '-pass', '1', '-passlogfile',
+                '-b:a', '92k', '-ac', '2', '-pass', '1', '-passlogfile',
                 '/target/file',
             ], [
                 '-y', '-i', __FILE__,
                 'extra', 'param', '-threads', 24, '-b:v', '665k',
-                '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
-                '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
-                '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', '2', '-pass', '2', '-passlogfile',
+                '-b:a', '92k', '-ac', '2', '-pass', '2', '-passlogfile',
                 '/target/file',
             ]], null, $formatExtra2],
             [false, [[
                 '-y', '-i', __FILE__, '-b:v', '666k',
-                '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
-                '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
-                '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', '2', '-pass', '1', '-passlogfile',
+                '-b:a', '92k', '-ac', '2', '-pass', '1', '-passlogfile',
                 '/target/file',
             ], [
                 '-y', '-i', __FILE__,
                 '-b:v', '666k',
-                '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
-                '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
-                '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', '2', '-pass', '2', '-passlogfile',
+                '-b:a', '92k', '-ac', '2', '-pass', '2', '-passlogfile',
                 '/target/file',
             ]], $listeners, $progressableFormat2],
             [true, [[
                 '-y', '-i', __FILE__,
                 '-threads', 24, '-b:v', '666k',
-                '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
-                '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
-                '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', '2', '-pass', '1', '-passlogfile',
+                '-b:a', '92k', '-ac', '2', '-pass', '1', '-passlogfile',
                 '/target/file',
             ], [
                 '-y', '-i', __FILE__,
                 '-threads', 24,
                 '-b:v', '666k',
-                '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
-                '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
-                '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', '2', '-pass', '2', '-passlogfile',
+                '-b:a', '92k', '-ac', '2', '-pass', '2', '-passlogfile',
                 '/target/file',
             ]], $listeners, $progressableFormat],
             [true, [[
@@ -632,17 +601,11 @@ class VideoTest extends AbstractStreamableTestCase
         $video->save($format, $outputPathfile);
 
         $expectedPass1 = [
-            '-y', '-i', __FILE__, 'param', '-threads', 24, '-b:v', 'k', '-refs',
-            '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
-            '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71',
-            '-qcomp', '0.6', '-qdiff', '4', '-trellis', '1',
+            '-y', '-i', __FILE__, 'param', '-threads', 24, '-b:v', 'k',
             '-pass', '1', '-passlogfile', '/target/file',
         ];
         $expectedPass2 = [
-            '-y', '-i', __FILE__, 'param', '-threads', 24, '-b:v', 'k', '-refs',
-            '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
-            '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71',
-            '-qcomp', '0.6', '-qdiff', '4', '-trellis', '1',
+            '-y', '-i', __FILE__, 'param', '-threads', 24, '-b:v', 'k',
             '-pass', '2', '-passlogfile', '/target/file',
         ];
 
@@ -650,7 +613,7 @@ class VideoTest extends AbstractStreamableTestCase
         foreach ($capturedCommands as $capturedCommand) {
             $prefix = null;
             foreach ($capturedCommand as $command) {
-                if (false !== strpos($command, '/pass-')) {
+                if (str_contains($command, '/pass-')) {
                     $prefix = $command;
                     break;
                 }
